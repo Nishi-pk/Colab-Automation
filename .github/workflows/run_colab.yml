@@ -1,20 +1,23 @@
 name: Run Colab Notebook
 
-# Trigger the workflow based on a schedule (cron) or manual trigger
 on:
   schedule:
-    - cron: '0 12 * * *'  # This runs at 11:00 AM every day (UTC)
-  workflow_dispatch:  # Allows manual trigger as well
+    - cron: '0 11 * * *'  # Runs every day at 11:00 AM UTC
+  workflow_dispatch:  # Allows manual triggering
 
 jobs:
-  run_colab:
+  execute_notebook:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Run Colab Notebook
-        uses: madumadhusudhan/colab-run@v1
-        with:
-          notebook_url: 'https://colab.research.google.com/drive/1ut3mRmLBxqshmwOVFOLz99q6W1cyFDAl'
+      - name: Install Jupyter and nbconvert
+        run: |
+          pip install jupyter nbconvert
+
+      - name: Run Notebook
+        run: |
+          jupyter nbconvert --to notebook --execute Trialsweeping_to_csvdownloaded_in_drive.ipynb --output output.ipynb
+
