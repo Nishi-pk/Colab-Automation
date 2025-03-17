@@ -19,5 +19,5 @@ jobs:
 
       - name: Run Notebook
         run: |
-          jupyter nbconvert --to notebook --execute Trialsweeping_to_csvdownloaded_in_drive.ipynb --output output.ipynb
+          jupyter nbconvert --to notebook --execute Sweepinggithub.ipynb --output output.ipynb
 
