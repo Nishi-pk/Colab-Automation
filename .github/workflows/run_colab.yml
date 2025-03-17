@@ -1,0 +1,20 @@
+name: Run Colab Notebook
+
+# Trigger the workflow based on a schedule (cron) or manual trigger
+on:
+  schedule:
+    - cron: '0 12 * * *'  # This runs at 11:00 AM every day (UTC)
+  workflow_dispatch:  # Allows manual trigger as well
+
+jobs:
+  run_colab:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Run Colab Notebook
+        uses: madumadhusudhan/colab-run@v1
+        with:
+          notebook_url: 'https://colab.research.google.com/drive/1ut3mRmLBxqshmwOVFOLz99q6W1cyFDAl'
