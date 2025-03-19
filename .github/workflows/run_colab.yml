@@ -17,7 +17,20 @@ jobs:
         run: |
           pip install jupyter nbconvert
 
+      - name: Download Previous CSV Artifact (if available)
+        uses: actions/download-artifact@v2
+        with:
+          name: processed-data  # This is the artifact name you'll use later
+          path: ./downloaded_data  # Directory where the CSV file will be stored locally
+
       - name: Run Notebook
         run: |
           jupyter nbconvert --to notebook --execute Sweepinggithub.ipynb --output output.ipynb
+
+      - name: Save CSV as Artifact (to be used in the future)
+        uses: actions/upload-artifact@v2
+        with:
+          name: processed-data
+          path: path/to/your/generated/file.csv  # Update this to the correct path of the CSV
+
 
