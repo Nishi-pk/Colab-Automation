@@ -1,36 +1,36 @@
-name: Run Colab Notebook
+#name: Run Colab Notebook
 
-on:
-  schedule:
-    - cron: '0 11 * * *'  # Runs every day at 11:00 AM UTC
-  workflow_dispatch:  # Allows manual triggering
+#on:
+#  schedule:
+#    - cron: '0 11 * * *'  # Runs every day at 11:00 AM UTC
+#  workflow_dispatch:  # Allows manual triggering
 
-jobs:
-  execute_notebook:
-    runs-on: ubuntu-latest
+#jobs:
+#  execute_notebook:
+#    runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
+#    steps:
+#      - name: Checkout Repository
+#        uses: actions/checkout@v2
 
-      - name: Install Jupyter and nbconvert
-        run: |
-          pip install jupyter nbconvert
+#      - name: Install Jupyter and nbconvert
+#        run: |
+#          pip install jupyter nbconvert
 
-      - name: Download Previous CSV Artifact (if available)
-        uses: actions/download-artifact@v2
-        with:
-          name: processed-data  # This is the artifact name you'll use later
-          path: ./downloaded_data  # Directory where the CSV file will be stored locally
+ #     - name: Download Previous CSV Artifact (if available)
+  #      uses: actions/download-artifact@v2
+ #       with:
+ #         name: processed-data  # This is the artifact name you'll use later
+ #         path: ./downloaded_data  # Directory where the CSV file will be stored locally
 
-      - name: Run Notebook
-        run: |
-          jupyter nbconvert --to notebook --execute Sweepinggithub.ipynb --output output.ipynb
+ #     - name: Run Notebook
+ #       run: |
+ #         jupyter nbconvert --to notebook --execute Sweepinggithub.ipynb --output output.ipynb
 
-      - name: Save CSV as Artifact (to be used in the future)
-        uses: actions/upload-artifact@v2
-        with:
-          name: processed-data
-          path: path/to/your/generated/file.csv  # Update this to the correct path of the CSV
+ #     - name: Save CSV as Artifact (to be used in the future)
+ #       uses: actions/upload-artifact@v2
+ #       with:
+ #         name: processed-data
+ #         path: path/to/your/generated/file.csv  # Update this to the correct path of the CSV
 
 
